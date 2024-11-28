@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "tree-property-value-analyzer"
+version = "0.1.0"
+description = "analyzes the correlation between tree heights and property values"
+authors = ["Nicolas <nicolas.markos@doctorflix.de>"]
+readme = "README.md"
+packages = [{include = "brightbeam_analysis"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.3"
+pydantic = "^2.10.1"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.3"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["brightbeam_analysis/tests"]
+
+[tool.ruff]
+line-length = 100
+# Enable isort rules
+select = ["E", "F", "I"]  # E and F are Python errors, I is import sorting
+
+# Import sorting
+[tool.ruff.isort]
+known-first-party = ["brightbeam_analysis"]  # Treat these as first-party imports
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+lines-between-types = 1  # Add a line between different import sections
+
+
+[tool.ruff.lint]
+# Additional rules you might want
+select = [
+    "E",   # pycodestyle
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+]
